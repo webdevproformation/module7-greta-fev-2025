@@ -1,0 +1,28 @@
+# fichier .yaml
+# fichier .xml
+# fichier .json
+# fichier contient des tableaux 
+# ATTENTION à la syntaxe 
+# première caractéristique => possible de stocker des commentaires contrairement aux fichiers .json / .xml  
+
+# possibilité de sauter des lignes 
+
+nom: Alain 
+prenom: John DOE
+description: > formation
+               DWWM
+cv: | texte 
+    avec saut de ligne 
+age: 20
+prix: 12.5
+competences: ["PHP","JS","HTML"]
+centre_interets :
+    - Jogging
+    - Natation
+    - Design
+security:
+    provider : App\Controller\Security.php
+    env:
+      login: root
+      password: pa33word
+      host: localhost
