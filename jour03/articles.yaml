@@ -1,0 +1,24 @@
+title: "Decouverte Yml"
+articles:
+    -
+        title: titre 1
+        url_img: https://via.placeholder.com/350x150?text=miniature article1
+        contenu: >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+          Ipsa amet sunt debitis adipisci, obcaecati aliquam officiis 
+          itaque necessitatibus mollitia, quaerat porro! Deleniti fugit 
+          sit veniam nisi quas. Dicta, itaque, iure.
+    -
+        title: titre 2
+        url_img: https://via.placeholder.com/350x150?text=miniature article2
+        contenu: >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+          Ipsa amet sunt debitis adipisci,  Deleniti fugit sit 
+          veniam nisi quas. Dicta, itaque, iure.
+    -
+        title: titre 3
+        url_img: https://via.placeholder.com/350x150?text=miniature article3
+        contenu: >
+          consectetur adipisicing elit. Ipsa amet sunt debitis adipisci, 
+          obcaecati aliquam officiis itaque necessitatibus mollitia, 
+          quaerat porro! Deleniti fugit sit veniam nisi quas. Dicta, itaque, iure.

@@ -1,0 +1,32 @@
+nom: exo1
+notation:
+    a: 5 points 
+    b: 6 points
+    c: 9 points
+enoncé: >
+    lorem ipsum
+    sed dolores
+livraison:
+    email: toto@yahoo.fr
+    formulaire: http://mon-formulaire.com
+
+# commentaires
+# en yaml pas besoin de mettre de guillemets autour des textes (string)
+# pas besoin de mettre de virgule
+# par contre IL FAUT OBLIGATOIREMENT insére 4 espaces avant une clé d'un tableau association 
+# pas de = pour stocker une valeur dans une clé , c'est le : 
+# l'espace 
+# > chevron doit être ajouté SI le texte contient des sauts de ligne
+# c'est une sorte de TABLEAU 
+
+# utiliser le fichier exo.yaml pour remplir une page PHP 
+# pour faire ça => utiliser une librairie que l'on va télécharger via composer 
+# recupérer le fichier .yaml / parcourir (parser) / le transformer en tableau php classique 
+# site internet => https://packagist.org/
+# https://packagist.org/packages/symfony/yaml
+
+## cd jour03
+## composer require symfony/yaml
+## création d'un dossier vendor (dans jour03)
+## création d'un fichier composer.json
+## création d'une fichier composer.lock 
