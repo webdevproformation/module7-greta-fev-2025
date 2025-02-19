@@ -19,3 +19,7 @@
 - chaque librairie bien faite dispose d'un mode d'emploi
     - <https://carbon.nesbot.com>
     - <https://symfony.com/doc/current/components/yaml.html>
+
+- invitation => <https://getcomposer.org/doc/>
+
+- 
