@@ -50,3 +50,5 @@ composer.json => vient avec composer (lui contient la liste complète de tous le
 importmap.php => fichier qui permet d'importer des fichiers js / css ... assets => public
 phpunit => fichier de configuration de PHPUnit
 symfony.lock => informations sur l'installation de votre projet Symfony 
+
+# pause rdv 15h50 => commencer à utiliser Symfony 
