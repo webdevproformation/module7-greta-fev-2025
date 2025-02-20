@@ -52,3 +52,24 @@ phpunit => fichier de configuration de PHPUnit
 symfony.lock => informations sur l'installation de votre projet Symfony 
 
 # pause rdv 15h50 => commencer à utiliser Symfony 
+
+
+=> il faut regarder le contenu du fichier package.json pour connaitre la version que vous avez 
+=> attention la version dépendre de la version de PHP 
+=> c'est normal de ne pas voir la dernière version pour chaque module 
+=> IL FAUT QUE LES MODULES SOIENT COMPATIBLES avec votre version de PHP 
+
+=> lancer une serveur local pour faire fonctionner notre Symfony
+=> `symfony serve`
+=> http://127.0.0.1:8000
+
+attrib -r var\*.* /s
+attrib -s -h -r "var\*.*" /s /d
+
+
+// Recette de cuisine =>  index.php 
+// dans le projet Symfony/public/index.php (point d'entrée)
+// pas besoin de le toucher !!!! 
+
+// etape 2 => Recette de cuisine =>  Controller 
+=> src/Controller => 
