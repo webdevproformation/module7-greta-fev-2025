@@ -63,6 +63,7 @@ symfony.lock => informations sur l'installation de votre projet Symfony
 => `symfony serve`
 => http://127.0.0.1:8000
 
+
 attrib -r var\*.* /s
 attrib -s -h -r "var\*.*" /s /d
 

@@ -14,11 +14,12 @@ class HomeController{
     }
     // http://127.0.0.1:8000/
 
-
     // attention chaque route DOIT avoir un nom différent
     #[Route("/contact" , name:"page_contact")]
     public function contact(){
         return new Response("je suis la page de contact !!!!");
-        // https://127.0.0.1:8000/contact
+        // http://127.0.0.1:8000/contact
     }
+
+    // pause café rdv 10h55 @ toute suite !!!!!!!!!!!!!!!!
 }

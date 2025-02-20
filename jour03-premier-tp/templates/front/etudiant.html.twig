@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>je suis la page étudiant</h1>
+    <ul>
+        <li> {{ nom }}</li>
+        <li> age : {{ age }} </li>
+        <!-- http://127.0.0.1:8000/etudiant -->
+    </ul>
+    <h2>Compétences</h2>
+    <ul>
+        {% for competence in competences %}
+            <li>{{ competence }}</li>
+        {% endfor %} 
+    </ul>
+</body>
+</html>
