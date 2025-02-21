@@ -76,7 +76,7 @@ class BackController extends AbstractController{
                [ "id" => 3 , "nom" => "Zorro" , "age" => 18 , "role" => "rédacteur" ],
             ]
         ];
-        $id = $request->attributes->get("id");
+        $id = $request->attributes->get("id"); // $_GET
         $resultat = [];
         foreach($data["users"] as $user){
             if($user["id"] == $id){
@@ -87,6 +87,15 @@ class BackController extends AbstractController{
             return $this->render("back/404.html.twig");
         }   
         return $this->render("back/users.html.twig" , $resultat[0]);
+    }
+
+    #[Route("/inscription" , name:"page_inscription")]
+    public function inscription( Request $request){
+
+        dump($request->request->get("email")); // $_POST["email"]
+
+
+        return $this->render("back/inscription.html.twig"); 
     }
 
 }
