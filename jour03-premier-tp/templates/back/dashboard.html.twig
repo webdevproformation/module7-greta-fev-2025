@@ -1,0 +1,17 @@
+{% extends "front.html.twig" %}
+
+{% block contenu_page %}
+
+<h1>Bienvenue {{ user.nom}}</h1>
+
+<p>vous êtes {{ user.role}} et vous vous êtes connecté le {{user.dt_connexion}}</p>    
+
+{#  variable | filtre  #}
+<h2>liste des {{ session | length  }} produits en session </h2>
+<ul>
+    {% for produit in session %}
+        <li>produit : {{produit.nom}} - id : {{produit.id}} - prixTTC : {{ produit.prix }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
