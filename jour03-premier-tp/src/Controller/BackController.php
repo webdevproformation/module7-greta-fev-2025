@@ -67,4 +67,26 @@ class BackController extends AbstractController{
         // dd($resultat); // dump and die(); 
     }
 
+    #[Route("/gestion-users/{id}" , name:"page_gestion_users")]
+    public function gestionUser( Request $request ){
+        $data = [
+            "users" => [
+               [ "id" => 1 , "nom" => "ALain" , "age" => 22 , "role" => "admin" ],
+               [ "id" => 2 , "nom" => "Céline" , "age" => 45 , "role" => "rédacteur" ],
+               [ "id" => 3 , "nom" => "Zorro" , "age" => 18 , "role" => "rédacteur" ],
+            ]
+        ];
+        $id = $request->attributes->get("id");
+        $resultat = [];
+        foreach($data["users"] as $user){
+            if($user["id"] == $id){
+                $resultat[] = $user ;
+            }
+        }
+        if(count($resultat) === 0){
+            return $this->render("back/404.html.twig");
+        }   
+        return $this->render("back/users.html.twig" , $resultat[0]);
+    }
+
 }

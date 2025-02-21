@@ -37,3 +37,35 @@ $data = [
  - cette page utiliser le modèle 'front.html.twig' pour importer bootstrap
  - ajouter dans la barre de menu le lien vers la page "dashboard"
  - tester cette page  
+ - 
+
+
+## cas pratique
+
+- ajouter un nouvelle méthode dans le controller BackController qui s'appelle "gestionUsers"
+- cette méthode appelée via l'adresse internet http://127.0.0.1:8000/gestion-users/{id}
+- cette méthode exécute le fichier de vue back/user.html.twig (si l'utilisateur existe)
+- ou cette méthode exécute le fichier de vue back/404.html.twig (si l'utilisateur n'existe pas )
+- ET elle envoie les données suivantes 
+
+```php 
+$data = [
+    "users" => [
+       [ id => 1 , nom => "ALain" , age => 22 , role => admin ],
+       [ id => 2 , nom => "Céline" , age => 45 , role => rédacteur ],
+       [ id => 3 , nom => "Zorro" , age => 18 , role => rédacteur ],
+    ]
+];
+```
+
+- le fichier de vue  user.html.twig contient une structure de page html et dans la balise body :
+
+
+```html
+<h1>Fiche de ALain</h1>
+
+<p>il est admin et il est agé de 22 ans</p>    
+```
+ - cette page utiliser le modèle 'front.html.twig' pour importer bootstrap
+ - ajouter dans la barre de menu le lien vers la page qui permet d'afficher chaque fiche 
+ - tester ces pages

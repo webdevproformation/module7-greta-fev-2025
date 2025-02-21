@@ -23,6 +23,18 @@
                 <li class="nav-item">
                     <a href="{{ path("page_dashboard") }}" class="nav-link">dashboard</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        Gestion des utilisateurs 
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for i in 1..3 %}
+                            <li>
+                                <a href="{{ path("page_gestion_users" ,{ id : i }) }}" class="dropdown-item">user {{i}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
