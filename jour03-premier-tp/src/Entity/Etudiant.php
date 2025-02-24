@@ -2,9 +2,10 @@
 
 namespace App\Entity ;
 
+use App\Repository\EtudiantRepository;
 use Doctrine\ORM\Mapping as ORM ;
 
-#[ORM\Entity()]
+#[ORM\Entity(repositoryClass:EtudiantRepository::class)]
 class Etudiant{
 
     #[ORM\Id]
@@ -29,4 +30,132 @@ class Etudiant{
 
     #[ORM\Column(length:20)]
     private ?string $telephone = null ;
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get the value of prenom
+     */ 
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * Set the value of prenom
+     *
+     * @return  self
+     */ 
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nom
+     */ 
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set the value of nom
+     *
+     * @return  self
+     */ 
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of age
+     */ 
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * Set the value of age
+     *
+     * @return  self
+     */ 
+    public function setAge($age)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of dt_naissance
+     */ 
+    public function getDtNaissance()
+    {
+        return $this->dt_naissance;
+    }
+
+    /**
+     * Set the value of dt_naissance
+     *
+     * @return  self
+     */ 
+    public function setDtNaissance($dt_naissance)
+    {
+        $this->dt_naissance = $dt_naissance;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of is_admin
+     */ 
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
+
+    /**
+     * Set the value of is_admin
+     *
+     * @return  self
+     */ 
+    public function setIsAdmin($is_admin)
+    {
+        $this->is_admin = $is_admin;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of telephone
+     */ 
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * Set the value of telephone
+     *
+     * @return  self
+     */ 
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
 }

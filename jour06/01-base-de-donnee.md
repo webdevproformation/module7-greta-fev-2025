@@ -83,3 +83,18 @@ symfony console d:m:m
 [notice] finished in 475.8ms, used 24M memory, 1 migrations executed, 5 sql queries     
                                                                                         
  [OK] Successfully migrated to version: DoctrineMigrations\Version20250224105748  
+
+## cas pratique
+
+créer une table qui s'appelle Etudiant
+
+cette table contient les 6 colonnes suivantes :
+
+id INT PK AUTOINCREMENT
+prenom texte avec un maximum de 255 lettres
+nom texte de 255 lettres max
+age chiffre avec un maximum de 255 par défaut égal à 10
+dt_naissance DATETIME
+is_admin BOOLEAN 
+
+utiliser Doctrine / Entité / Migration pour réaliser cet exo
