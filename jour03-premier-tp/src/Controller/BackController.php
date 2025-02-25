@@ -2,10 +2,13 @@
 
 namespace App\Controller ;
 
+use App\Entity\Etudiant;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class BackController extends AbstractController{
 
@@ -96,6 +99,32 @@ class BackController extends AbstractController{
 
 
         return $this->render("back/inscription.html.twig"); 
+    }
+
+    // http://127.0.0.1:8000/add-9-etudiant
+    #[Route("/add-9-etudiant" , name : "page_9_etudiant")]
+    public function add9Etudiants (
+        EntityManagerInterface $em
+    ){
+
+        $prenom = ["Alain" , "Pierre" , "Julien" , "Céline"];
+        $nom = ["DUPONT" , "DUFOUR" , "DUPIEU" , "DUPRES"];
+
+        for($i = 1 ; $i < 10; $i++){
+            shuffle($prenom );
+            shuffle($nom );
+            $etudiant = new Etudiant();
+            $etudiant->setPrenom($prenom[0])
+                     ->setNom($nom [0])
+                     ->setTelephone("060606060$i")
+                     ->setDtNaissance(new DateTime("2024-01-0$i"))
+                     ->setIsAdmin(TRUE)
+                     ->setAge($i);
+            $em->persist($etudiant);
+        }
+        $em->flush();
+        return new Response("9 étudiants viennent d'être créés");
+
     }
 
 }
