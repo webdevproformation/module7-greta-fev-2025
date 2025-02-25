@@ -111,8 +111,70 @@ class GestionController extends AbstractController{
     public function read(
         FleurRepository $fleurRepo
     ){
-        $fleurRepo->findAll() ; // SELECT * FROM fleurs 
+        $fleurs = $fleurRepo->findAll() ; // SELECT * FROM fleurs 
+
+        return $this->render("front/vue.html.twig" , [ "fleurs" => $fleurs ]) ; 
     }
+    
+    #[Route("/create" , name:"page_create")]
+    public function create(
+        EntityManagerInterface $em
+    ){
+        $fleur = new Fleur();
+        $fleur->setNom("rose");
+
+        $em->persist($fleur);
+        $em->flush();
+    }
+
+    #[Route("/delete" , name: "page_delete")]
+    public function delete(
+        EntityManagerInterface $em,
+        FleurRepository $fleurRepo
+    ){
+        $fleur = $fleurRepo->findOneBy(["id"=> 1]);
+
+        if(empty($fleur)){
+            return new Response("Aucune fleur trouvée");
+        }
+
+        $em->remove($fleur);
+        $em->flush(); 
+    }
+
+    #[Route("/update" , name: "page_update")]
+    public function update(
+        EntityManagerInterface $em,
+        FleurRepository $fleurRepo    
+    ){
+        $fleur = $fleurRepo->findOneBy(["id"=> 1]);
+
+        if(empty($fleur)){
+            return new Response("Aucune fleur trouvée");
+        }
+
+        $fleur->setNom("jasmin");
+
+        $em->persist($fleur);
+        $em->flush();
+    }
+
+    #[Route("/update2" , name: "page_update2")]
+    public function update2(
+        EntityManagerInterface $em,
+        FleurRepository $fleurRepo    
+    ){
+        try{
+            $fleur = $fleurRepo->findOneBy(["id"=> 1]);
+            $fleur->setNom("jasmin");
+    
+            $em->persist($fleur);
+            $em->flush();
+        }catch(Exception $e){
+             return new Response("Aucune fleur trouvée");
+        }
+    }
+    
 }
 
 ```
