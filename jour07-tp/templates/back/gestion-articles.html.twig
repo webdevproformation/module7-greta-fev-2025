@@ -4,7 +4,7 @@
 
 
 {% block body %}
-    <h1>Gestion des articles</h1>
+    <h1>Gestion des {{ articles | length   }} articles </h1>
 
     <table class="table table-striped align-middle">
         <thead>
@@ -26,7 +26,9 @@
                     <td>{{article.description }}</td>
                     <td>{{article.auteur }}</td>
                     <td>
-                        xxxx
+                        <a href="{{ path("page_delete_article" , { id : article.id })}}" class="btn btn-danger">
+                            supprimer l'article
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

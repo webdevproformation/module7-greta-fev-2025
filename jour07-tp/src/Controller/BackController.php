@@ -35,6 +35,9 @@ class BackController extends AbstractController{
         return new Response("création réussie de 5 articles ");
     }
 
+    // Route()
+    // /gestion-articles => ça va dans la barre d'adresse
+    // name:"page_gestion_article" => la fonction path("page_gestion_article") dans twig
     #[Route("/gestion-articles", name:"page_gestion_article")]
     public function gestionArticles(
         ArticleRepository $articleRepository
