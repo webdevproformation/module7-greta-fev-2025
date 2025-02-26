@@ -3,6 +3,8 @@
 namespace App\Controller ;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
+use App\Form\EtudiantType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,4 +67,27 @@ class BackController extends AbstractController{
 
         return $this->redirectToRoute("page_gestion_article");
     }
+
+
+    #[Route("/gestion-articles-add" , name:"page_add_article")]
+    public function ajouterArticle(){
+
+        $form = $this->createForm(ArticleType::class); // créer le html du formulaire
+
+        return $this->render("back/form_create_article.html.twig" , [ 
+            "form" => $form->createView()
+            ]
+        );
+
+    }
+
+    #[Route("/gestion-etudiant-add" , name:"page_add_etudiant")]
+    public function ajouterEtudiant(){
+        $form = $this->createForm(EtudiantType::class);
+
+        return $this->render("back/form_create_etudiant.html.twig", [
+            "form" => $form->createView() // => je veux avoir le html 
+                                          // <form> ....
+        ]);
+    }   
 }

@@ -6,6 +6,10 @@
 {% block body %}
     <h1>Gestion des {{ articles | length   }} articles </h1>
 
+    <a href="{{ path("page_add_article")}}" class="btn btn-primary">ajouter un nouvel article</a>
+
+    <a href="{{ path("page_add_etudiant")}}" class="btn btn-info ms-3">ajouter un profil étudiant</a>
+
     <table class="table table-striped align-middle">
         <thead>
             <tr>
