@@ -63,7 +63,30 @@ class FrontController
 
 
 2. ce site internet utilise une base de données Sqlite contenant 1 table "articles"
-3. cette table contient les colonnes suivantes 
+
+1. creer la base
+```txt
+- modifier le fichier .env
+- activer le lien pour la base sqlite 
+- DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
+``` 
+
+```sh
+cd jour07-tp
+symfony console doctrine:database:create  # version longue de la commande
+symfony console d:d:c # version courte de la commande 
+```
+
+```sh
+# pour Kevin D
+vagrant up # lancer la machine virtuelle
+vagrant ssh # accéder à la machine virtuelle
+sudo su
+cd /var/www/html/jour07-tp
+symfony console d:d:c
+```
+
+1. cette table contient les colonnes suivantes 
     1. id INT Primary Key Autoincrément
     2. titre texte avec un max de 255 caractères
     3. url_img texte avec un max de 255 caractères
@@ -71,6 +94,12 @@ class FrontController
     5. duree chiffre entier strictement supérieur à 0 et sa valeur par défaut est 1
     6. auteur texte avec un max de 255 caractères
     7. dt_creation DATETIME avec la date de maintenant par défaut 
+
+2. créer la table 
+
+
+3. insérer des données  
+(deux techniques possibles)
 
 Pour la création des articles utiliser SQL et SQLite pour créer 10 articles avec le contenu de votre choix 
 
