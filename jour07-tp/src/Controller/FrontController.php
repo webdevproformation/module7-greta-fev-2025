@@ -2,15 +2,20 @@
 
 namespace App\Controller ;
 
+use App\Repository\ArticleRepository;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FrontController extends AbstractController{
 
     #[Route("/" , name:"page_home")]
-    public function accueil()
+    public function accueil(
+        ArticleRepository $articleRepository
+    )
     {
-        return $this->render("front/home.html.twig");
+        $articles = $articleRepository->findAll(); // SELECT * FROM article 
+
+        return $this->render("front/home.html.twig" , [ "articles" => $articles ]);
     }
 
     #[Route("/presentation" , name:"page_presentation")]

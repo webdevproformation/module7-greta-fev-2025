@@ -130,7 +130,38 @@ symfony console d:m:m
 3. insérer des données  
 (deux techniques possibles)
 
+// solution 1 créer un script sql à la main
+// dans var/remplir.sql
+
+```sql
+INSERT INTO article 
+( titre , url_img , description , duree , auteur , dt_creation )
+VALUES
+( 'article 2' , 'https://picsum.photos/200/300' , 'lorem ipsum de description' , 20 , 'Alain' , '2025-02-26 10:00:00' ),
+( 'article 3' , 'https://picsum.photos/200/300' , 'lorem ipsum de description' , 15 , 'Alain' , '2025-02-26 10:00:00' ),
+( 'article 1' , 'https://picsum.photos/200/300' , 'lorem ipsum de description' , 10 , 'Alain' , '2025-02-26 10:00:00' ),
+( 'article 4' , 'https://picsum.photos/200/300' , 'lorem ipsum de description' , 30 , 'Zorro' , '2025-02-26 10:00:00' ),
+( 'article 5' , 'https://picsum.photos/200/300' , 'lorem ipsum de description' , 60 , 'Zorro' , '2025-02-26 10:00:00' )
+```
+
+
+// ajouter des setter et getter dans l'entité => OK
+// créer le repository => OK
+// associer le repository avec l'entité  => OK 
+// créer une méthode dans un controller qui va avoir une méthode spéciale dont le rôle va être d'utiliser Doctrine pour INSERER des données dans la table !!
+
+```sh
+symfony console make:migration
+php bin/console make:migration # ancienne manière de faire (qui fonctionne ENCORE) si tu n'as pas installé symfony-cli 
+```
+
+
 Pour la création des articles utiliser SQL et SQLite pour créer 10 articles avec le contenu de votre choix 
+
+4. remplir la page d'accueil de mon site internet
+
+
+
 
 Vous avez carte blanche pour la mise en page du site internet 
 

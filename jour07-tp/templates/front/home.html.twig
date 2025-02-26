@@ -5,6 +5,27 @@
 {% block body %}
 
     <h1  class="mb-3"><i class="bi bi-sun"></i> Bienvenue dans mon blog</h1>
-    <p>TODO : à finir</p>
+   
+   <section class="row">
+    {% for article in articles %}
+        <div class="col-3 mb-5">
+            <article class="card">
+                <img src="{{ article.urlImg }}?{{ article.titre }}" alt="" height="200" style="object-fit:cover">
+                <div class="card-body">
+                    <h2 class="card-title">{{ article.titre }}</h2>
+                    <p class="card-text">{{ article.description }}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <span>auteur : {{ article.auteur }}</span>
+                    {# https://twig.symfony.com/doc/3.x/filters/format_datetime.html 
+                        composer require twig/intl-extra
+                    #}
+                    <span>le : {{ article.dtCreation | format_datetime('short', 'none', locale: 'fr') }}</span>
+                </div>
+            </article>
+        </div>
+    {% endfor %}
+   </section>
+    
 
 {% endblock %}
