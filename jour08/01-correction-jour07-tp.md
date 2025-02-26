@@ -97,6 +97,35 @@ symfony console d:d:c
 
 2. créer la table 
 
+```php 
+<?php 
+
+namespace App\Entity ;
+
+class Article{
+
+    private ...
+
+}
+```
+
+```sh
+symfony console make:migration
+symfony console doctrine:migrations:migrate
+symfony console d:m:m
+```
+
+```sh
+# pour Kevin D
+vagrant up # lancer la machine virtuelle si nécessaire
+vagrant ssh # accéder à la machine virtuelle si nécessaire
+sudo su
+cd /var/www/html/jour07-tp
+symfony console make:migration
+symfony console doctrine:migrations:migrate
+symfony console d:m:m
+```
+
 
 3. insérer des données  
 (deux techniques possibles)
