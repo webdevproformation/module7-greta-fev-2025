@@ -34,7 +34,7 @@ class Article{
     #[ORM\Column()]
     private ?\DateTime $dt_creation = null ;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?float $prix = null;
     
     // je veux QUE avant le persist DOCTRINE donne une valeur à la propriété dt_creation

@@ -2,12 +2,15 @@
 
 namespace App\Controller ;
 
+use App\Entity\User;
+use App\Form\UserType;
 use App\Entity\Article;
 use App\Entity\Etudiant;
 use App\Form\ArticleType;
 use App\Form\EtudiantType;
-use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManager;
+use App\Repository\UserRepository;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -141,4 +144,35 @@ class BackController extends AbstractController{
                                           // <form> ....
         ]);
     }   
+
+    #[Route("/gestion-user-add" , name:"page_add_user")]
+    public function ajouterUser(
+        EntityManagerInterface $em,
+        Request $request 
+    )
+    {
+        $form = $this->createForm(UserType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $data = $form->getData();
+
+            $user = new User();
+            $user->setPrenom($data["prenom"])
+                 ->setNom($data["nom"])
+                 ->setAge($data["age"])
+                 ->setCV($data["cv"])
+                 ->setRole($data["role"])
+            ;
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute("page_gestion_article");
+
+        }
+
+        return $this->render("back/form_create_user.html.twig" , [
+            "form" => $form->createView()
+        ]);
+    }
+
 }
