@@ -33,6 +33,9 @@ class Article{
 
     #[ORM\Column()]
     private ?\DateTime $dt_creation = null ;
+
+    #[ORM\Column]
+    private ?float $prix = null;
     
     // je veux QUE avant le persist DOCTRINE donne une valeur à la propriété dt_creation
     // $em->persist($objet)
@@ -174,6 +177,18 @@ class Article{
     public function setDtCreation($dt_creation)
     {
         $this->dt_creation = $dt_creation;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): static
+    {
+        $this->prix = $prix;
 
         return $this;
     }

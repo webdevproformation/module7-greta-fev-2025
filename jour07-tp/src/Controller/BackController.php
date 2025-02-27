@@ -3,14 +3,16 @@
 namespace App\Controller ;
 
 use App\Entity\Article;
+use App\Entity\Etudiant;
 use App\Form\ArticleType;
 use App\Form\EtudiantType;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class BackController extends AbstractController{
 
@@ -70,20 +72,69 @@ class BackController extends AbstractController{
 
 
     #[Route("/gestion-articles-add" , name:"page_add_article")]
-    public function ajouterArticle(){
+    public function ajouterArticle(
+        Request $request, // $_POST
+        EntityManagerInterface $em
+    ){
 
         $form = $this->createForm(ArticleType::class); // créer le html du formulaire
+
+        $form->handleRequest($request); // récupérer les valeurs du $_POST
+
+        if($form->isSubmitted() && $form->isValid()){ // verification
+
+            $data = $form->getData(); // voici le contenu de la variable $data => tableau associatif
+            /**
+             * [
+             *  "titre" => "....",
+             *  "description" => "....."
+             *  "duree" => "....."
+             *  "auteur" => "....."
+             *  "url_img" => "....." https://placecats.com/300/200
+             * ]
+             */
+
+            $article = new Article();
+            $article->setTitre($data["titre"])
+                    ->setDescription($data["description"])
+                    ->setAuteur($data["auteur"])
+                    ->setDuree($data["duree"])
+                    ->setUrlImg($data["url_img"])
+            ;
+            $em->persist($article);
+            $em->flush();
+            return $this->redirectToRoute("page_gestion_article");
+        }
 
         return $this->render("back/form_create_article.html.twig" , [ 
             "form" => $form->createView()
             ]
         );
-
     }
 
     #[Route("/gestion-etudiant-add" , name:"page_add_etudiant")]
-    public function ajouterEtudiant(){
+    public function ajouterEtudiant(
+        Request $request,
+        EntityManagerInterface $em
+    ){
         $form = $this->createForm(EtudiantType::class);
+
+        $form->handleRequest($request);// récupérer les valeurs du $_POST (saisie)
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            // INSERT INTO
+            $data = $form->getData();
+            $etudiant = new Etudiant();
+            $etudiant->setPrenom($data["prenom"])
+                     ->setNom($data["nom"])
+                     ->setAge($data["age"])
+                     ->setDescription($data["description"]);
+            $em->persist($etudiant);
+            $em->flush();
+            return $this->redirectToRoute("page_gestion_article");
+
+        }
 
         return $this->render("back/form_create_etudiant.html.twig", [
             "form" => $form->createView() // => je veux avoir le html 
