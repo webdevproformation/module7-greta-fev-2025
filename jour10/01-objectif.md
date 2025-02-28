@@ -1,5 +1,6 @@
 ## menu déroulant qui marche Article
 
+=> fin du formulaire d'ajout
 
 ## dans ArticleType 
 
