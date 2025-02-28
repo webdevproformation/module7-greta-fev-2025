@@ -116,6 +116,45 @@ class BackController extends AbstractController{
         );
     }
 
+    #[Route("/gestion-articles-update/{id}" , name: "page_update_article")]
+    public function miseAJourArticle(
+        EntityManagerInterface $em ,
+        ArticleRepository $articleRepository ,
+        Request $request 
+    ){
+        // récupérer l'article si il existe 
+
+        $id = $request->attributes->get("id");
+
+        $article = $articleRepository->findOneBy(["id" => $id]); // SELECT * FROM article WHERE id = :id 
+
+        if(empty($article)){
+            return new Response("aucune article trouvé");
+        }
+
+        // si ok afficher mon formulaire AVEC les données de l'article existant
+
+        $form = $this->createForm(ArticleType::class , $article); // créer un formulaire REMPLI 
+
+        // APRES 
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            // UPDATE
+            // dd($article); // $article avec le handleRequest prendre les nouvelles données $_POST
+            $em->persist($article);
+            $em->flush();
+            return $this->redirectToRoute("page_gestion_article");
+
+        }
+
+
+        return $this->render("back/form_update_article.html.twig" , [
+            "form" => $form->createView()
+        ]);
+    }
+
     #[Route("/gestion-etudiant-add" , name:"page_add_etudiant")]
     public function ajouterEtudiant(
         Request $request,

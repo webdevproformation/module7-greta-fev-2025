@@ -32,6 +32,7 @@
                     <td>{{article.description }}</td>
                     <td>{{article.auteur }}</td>
                     <td>
+                        <a href="{{ path("page_update_article", { id : article.id }) }}" class="btn btn-warning me-3">modifier</a>
                         <a href="{{ path("page_delete_article" , { id : article.id })}}" class="btn btn-danger">
                             supprimer l'article
                         </a>
