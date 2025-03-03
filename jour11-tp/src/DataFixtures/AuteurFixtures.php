@@ -29,3 +29,5 @@ class AuteurFixtures extends Fixture
         $manager->flush();
     }
 }
+
+// cas pratique => créer 30 commentaires via DataFixtures ET Faker 
