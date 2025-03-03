@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Auteur;
 use Faker\Factory;
 use App\Entity\Recette;
 use DateTimeImmutable;
@@ -20,8 +21,12 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
         $recette->setTitre($faker->realText(20))
                 ->setDescription($faker->realText(400))
                 ->setPrix($faker->numberBetween(5, 200))
-                ->setDtCreation(new DateTimeImmutable($faker->dateTimeThisCentury()->format('Y-m-d H:i:s')));
+                ->setDtCreation(new DateTimeImmutable($faker->dateTimeThisCentury()->format('Y-m-d H:i:s')))
+                ->setAuteur( $this->getReference("auteur_". $faker->numberBetween(0,49) , Auteur::class))
+            ;
         $manager->persist($recette);
+
+        $this->addReference("recette_$i" , $recette); 
        }
 
         $manager->flush();

@@ -23,6 +23,10 @@ class AuteurFixtures extends Fixture
                    ->setEmail($faker->email());
             
             $manager->persist($auteur); 
+
+            // attention il faut mettre cette ligne APRES le persist
+            // cette ligne va nous permettre d'utiliser une entité dans une autre fixture
+            $this->addReference( "auteur_$i" , $auteur ); 
         }
         // symfony console doctrine:fixture:load
         // vider toutes les tables de base de données ET remplir avec nos fixtures 

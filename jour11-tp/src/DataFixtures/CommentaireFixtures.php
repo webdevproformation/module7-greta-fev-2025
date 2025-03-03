@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Faker\Factory;
 use DateTimeImmutable;
 use App\Entity\Commentaire;
+use App\Entity\Recette;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -20,7 +21,9 @@ class CommentaireFixtures extends Fixture  implements DependentFixtureInterface
             $commentaire->setEmail($faker->email())
                         ->setSujet($faker->words(5 , true))
                         ->setMessage($faker->realText(60))
-                        ->setDtCreation($faker->dateTimeThisCentury()); 
+                        ->setDtCreation($faker->dateTimeThisCentury())
+                        ->setRecette($this->getReference("recette_" . $faker->numberBetween(0,99) , Recette::class))
+                        ; 
             $manager->persist($commentaire);
         }
         $manager->flush();
