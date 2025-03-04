@@ -26,6 +26,12 @@
         </tbody>
     </table>
 
+    <ol>
+    {% for recette in auteur.recettes %}
+        <li>{{ recette.titre }} </li>
+    {% endfor %}
+    </ol>
+
     <a href="{{ path('app_auteur_index') }}">back to list</a>
 
     <a href="{{ path('app_auteur_edit', {'id': auteur.id}) }}">edit</a>
