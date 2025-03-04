@@ -5,14 +5,16 @@
 {% block body_back %}
     <h1>Recette index</h1>
 
-    <table class="table">
+    <a href="{{ path('app_recette_new') }}" class="btn btn-primary my-3">Créer une nouvelle recette</a>
+
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Titre</th>
                 <th>Description</th>
                 <th>Prix</th>
-                <th>Dt_creation</th>
+                <th>Créé le</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,9 +23,10 @@
             <tr>
                 <td>{{ recette.id }}</td>
                 <td>{{ recette.titre }}</td>
-                <td>{{ recette.description }}</td>
-                <td>{{ recette.prix }}</td>
-                <td>{{ recette.dtCreation ? recette.dtCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <!-- twig extension  -->
+                <td>{{ recette.description | more(10) }}</td>
+                <td>{{ recette.prix | info_prix }}</td>
+                <td>{{ recette.dtCreation ? recette.dtCreation|date('d/m/Y H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_recette_show', {'id': recette.id}) }}">show</a>
                     <a href="{{ path('app_recette_edit', {'id': recette.id}) }}">edit</a>
@@ -37,5 +40,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_recette_new') }}">Create new</a>
+    
 {% endblock %}
