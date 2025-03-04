@@ -7,7 +7,7 @@
 
     <a href="{{ path('app_recette_new') }}" class="btn btn-primary my-3">Créer une nouvelle recette</a>
 
-    <table class="table table-striped">
+    <table class="table table-striped align-middle">
         <thead>
             <tr>
                 <th>Id</th>
@@ -15,7 +15,7 @@
                 <th>Description</th>
                 <th>Prix</th>
                 <th>Créé le</th>
-                <th>actions</th>
+                <th width="120">actions</th>
             </tr>
         </thead>
         <tbody>
@@ -25,11 +25,13 @@
                 <td>{{ recette.titre }}</td>
                 <!-- twig extension  -->
                 <td>{{ recette.description | more(10) }}</td>
-                <td>{{ recette.prix | info_prix }}</td>
-                <td>{{ recette.dtCreation ? recette.dtCreation|date('d/m/Y H:i:s') : '' }}</td>
+                <td class="text-end">{{ recette.prix | info_prix }}</td>
+                <td>{{ recette.dtCreation ? recette.dtCreation|date('d/m/Y') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_recette_show', {'id': recette.id}) }}">show</a>
-                    <a href="{{ path('app_recette_edit', {'id': recette.id}) }}">edit</a>
+                    <a href="{{ path('app_recette_edit', {'id': recette.id}) }}" class="btn btn-warning btn-sm me-1">
+                    <i class="bi bi-pencil-square"></i>
+                    </a>
+                    {{ include('recette/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
