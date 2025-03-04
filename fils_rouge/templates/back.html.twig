@@ -6,7 +6,24 @@
 
     <sidebar class="col-3"> 
         <h2>Menu admin</h2>
-
+        <!--
+        utiliser le module bootstrap
+        https://getbootstrap.com/docs/5.3/components/list-group/
+         -->
+         <div class="list-group">
+            <a href="{{ path("page_dashboard") }}" class="list-group-item list-group-item-action">
+                Dashboard
+            </a>
+            <a href="{{ path("app_recette_index") }}" class="list-group-item list-group-item-action">
+                Gestion des recettes
+            </a>
+            <a href="{{ path("app_auteur_index") }}" class="list-group-item list-group-item-action">
+                Gestion des auteurs
+            </a>
+            <a href="{{ path("app_commentaire_index") }}" class="list-group-item list-group-item-action">
+                Gestion des commentaires
+            </a>
+         </div>
     </sidebar> 
     <div class="col-9">
         {% block body_back %}{% endblock %}
