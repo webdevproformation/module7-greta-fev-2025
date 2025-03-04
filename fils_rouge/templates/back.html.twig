@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<section class="row">
+
+    <sidebar class="col-3"> 
+        <h2>Menu admin</h2>
+
+    </sidebar> 
+    <div class="col-9">
+        {% block body_back %}{% endblock %}
+    </div>
+</section>
+
+{% endblock %}
