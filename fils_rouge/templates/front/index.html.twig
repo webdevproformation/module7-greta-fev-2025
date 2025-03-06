@@ -9,6 +9,9 @@
     {% for recette in recettes %}
         <div class="col-3 mb-3">
             <article class="card">
+                <a href="{{ path("app_recette_show" , { id : recette.id }) }}">
+                    {{ image_recette(recette.image , 600)  }}
+                </a>
                 <div class="card-body">
                     <h2 class="card-title">{{ recette.titre }}</h2>
                     <p class="card-text">{{ recette.description | more ( 10 )}}</p>
