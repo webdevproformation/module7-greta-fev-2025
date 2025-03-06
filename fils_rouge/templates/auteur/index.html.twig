@@ -5,14 +5,16 @@
 {% block body_back %}
     <h1>Auteur index</h1>
 
-    <table class="table">
+     <a href="{{ path('app_auteur_new') }}" class="btn btn-dark my-3">Créer nouvel auteur</a>
+
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Email</th>
                 <th>Prenom</th>
                 <th>Nom</th>
-                <th>actions</th>
+                <th width="120">actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +25,10 @@
                 <td>{{ auteur.prenom }}</td>
                 <td>{{ auteur.nom }}</td>
                 <td>
-                    <a href="{{ path('app_auteur_show', {'id': auteur.id}) }}">show</a>
-                    <a href="{{ path('app_auteur_edit', {'id': auteur.id}) }}">edit</a>
+                    <a href="{{ path('app_auteur_edit', {'id': auteur.id}) }}" class="btn btn-warning btn-sm me-1">
+                    <i class="bi bi-pencil-square"></i>
+                    </a>
+                    {{ include('auteur/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -35,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_auteur_new') }}">Create new</a>
+   
 {% endblock %}

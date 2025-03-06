@@ -31,6 +31,7 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->flush();
     }
+    
     public function getDependencies(): array
     {
         return [
