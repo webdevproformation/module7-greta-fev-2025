@@ -12,7 +12,7 @@
             <tr>
                 <th>Id</th>
                 <th>Titre</th>
-                <th>Description</th>
+                <th>Miniature</th>
                 <th>Prix</th>
                 <th>Créé le</th>
                 <th width="120">actions</th>
@@ -24,7 +24,11 @@
                 <td>{{ recette.id }}</td>
                 <td>{{ recette.titre }}</td>
                 <!-- twig extension  -->
-                <td>{{ recette.description | more(10) }}</td>
+                {% if recette.image is null %}
+                    <td><img src="https://placehold.co/600x400?text=image+non+disponible" alt="" width="120" class="img-thumbnail"></td>
+                {% else %}
+                    <td><img src="{{ asset("img/" ~ recette.image )}}" alt="" width="120" class="img-thumbnail"></td>
+                {% endif %}
                 <td class="text-end">{{ recette.prix | info_prix }}</td>
                 <td>{{ recette.dtCreation ? recette.dtCreation|date('d/m/Y') : '' }}</td>
                 <td>
