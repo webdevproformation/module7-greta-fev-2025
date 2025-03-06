@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Auteur;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,15 +14,22 @@ class AuteurType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('prenom')
-            ->add('nom')
+            ->add('passwordPlainText')
+            ->add('roles' , ChoiceType::class, [
+                "choices" => [
+                    'ROLE_ADMIN' => "ROLE_ADMIN",
+                    'ROLE_REDACTEUR' => "ROLE_REDACTEUR"
+                ],
+                "placeholder" => "choisir un role",
+                 // le champ du formulaire roles n'est pas associé au propriété roles dans l'entité Auteur::class
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
+        /* $resolver->setDefaults([
             'data_class' => Auteur::class,
-        ]);
+        ]); */
     }
 }
