@@ -4,12 +4,14 @@ namespace App\Form;
 
 use App\Entity\Auteur;
 use App\Entity\Recette;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RecetteType extends AbstractType
 {
@@ -23,6 +25,24 @@ class RecetteType extends AbstractType
                     "rows" => 8
                 ]
             ])
+            ->add("miniature" , FileType::class , [
+                "label" => "Image à la une de la recette",
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    // https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types/Common_types
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image',
+                    ])
+                ],
+            ])
             ->add('prix' , MoneyType::class , [
                "attr" => [  "placeholder" =>"0,00" ]
             ])
@@ -33,7 +53,7 @@ class RecetteType extends AbstractType
                 "placeholder" => "Sélectionner une auteur pour cette recette",
                 'class' => Auteur::class,
                 'choice_label' => function(Auteur $auteur){
-                    return "{$auteur->getPrenom()} {$auteur->getNom()} - {$auteur->getEmail()}" ; 
+                    return "{$auteur->getEmail()}" ; 
                 },
             ])
         ;

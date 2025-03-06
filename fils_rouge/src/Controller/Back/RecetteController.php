@@ -6,10 +6,14 @@ use App\Entity\Recette;
 use App\Form\RecetteType;
 use App\Repository\RecetteRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/recette')]
 final class RecetteController extends AbstractController
@@ -23,13 +27,36 @@ final class RecetteController extends AbstractController
     }
 
     #[Route('/new', name: 'app_recette_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(
+        Request $request, 
+        EntityManagerInterface $entityManager ,
+        SluggerInterface $slugger,
+        #[Autowire('%kernel.project_dir%/public/img')] string $path_dossier_public
+    ): Response
     {
         $recette = new Recette();
         $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $image */
+            $image = $form->get("miniature")->getData();
+
+            if($image){
+                $nom_original = pathinfo($image->getClientOriginalName() , PATHINFO_FILENAME);
+                $nom_safe = $slugger->slug($nom_original);
+                $nom_final = $nom_safe . "-" . uniqid() . "." .$image->guessExtension();
+                
+                try{
+                    $image->move( $path_dossier_public , $nom_final);
+                }catch(FileException $f){
+
+                }
+
+                $recette->setImage($nom_final);
+            }
+
             $entityManager->persist($recette);
             $entityManager->flush();
 
