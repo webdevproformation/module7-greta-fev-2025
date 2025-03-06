@@ -78,12 +78,37 @@ final class RecetteController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_recette_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Recette $recette, EntityManagerInterface $entityManager): Response
+    public function edit(
+        Request $request, 
+        Recette $recette, 
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger,
+        #[Autowire('%kernel.project_dir%/public/img')] string $path_dossier_public
+    ): Response
     {
         $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $image = $form->get("miniature")->getData();
+
+            if($image){
+                $nom_original = pathinfo($image->getClientOriginalName() , PATHINFO_FILENAME);
+                $nom_safe = $slugger->slug($nom_original);
+                $nom_final = $nom_safe . "-" . uniqid() . "." .$image->guessExtension();
+                
+                try{
+                    $image->move( $path_dossier_public , $nom_final);
+                }catch(FileException $f){
+
+                }
+
+                $recette->setImage($nom_final);
+            }
+
+
+            $entityManager->persist($recette);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_recette_index', [], Response::HTTP_SEE_OTHER);
