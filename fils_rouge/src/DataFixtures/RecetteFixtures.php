@@ -22,7 +22,7 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
                 ->setDescription($faker->realText(400))
                 ->setPrix($faker->numberBetween(5, 200))
                 ->setDtCreation(new DateTimeImmutable($faker->dateTimeThisCentury()->format('Y-m-d H:i:s')))
-                ->setAuteur( $this->getReference("auteur_". $faker->numberBetween(0,49) , Auteur::class))
+                ->setAuteur( $this->getReference("auteur_". $faker->numberBetween(0,1) , Auteur::class))
             ;
         $manager->persist($recette);
 
