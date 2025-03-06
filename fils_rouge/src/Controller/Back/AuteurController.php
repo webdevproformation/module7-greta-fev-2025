@@ -65,14 +65,41 @@ final class AuteurController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_auteur_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Auteur $auteur, EntityManagerInterface $entityManager): Response
+    public function edit(
+        Request $request, 
+        Auteur $auteur, 
+        EntityManagerInterface $entityManager,
+        AuteurRepository $auteurRepository , 
+        UserPasswordHasherInterface $hasher
+    ): Response
     {
       
-
-        $form = $this->createForm(AuteurType::class, null, [ "auteur" => $auteur ]);
+        $form = $this->createForm(AuteurType::class, null, [ 
+            "auteur" => $auteur ,
+            "password_obligatoire" => false
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+            $id = $request->attributes->get("id");
+            /** @var Auteur $auteur */
+            $auteur = $auteurRepository->findOneBy(["id" => $id ]);
+            
+            // effectuer l'UPDATE 
+            if(empty($data["passwordPlainText"]) ){
+                // sans le changement de password
+                $auteur->setEmail($data["email"])
+                       ->setRoles([$data["roles"]])
+                ;
+            }else {
+                // qui inclu le changement de password
+                $auteur->setEmail($data["email"])
+                       ->setRoles([$data["roles"]])
+                       ->setPassword($hasher->hashPassword( $auteur, $data["passwordPlainText"] ));
+            }
+            $entityManager->persist($auteur); 
             $entityManager->flush();
 
             return $this->redirectToRoute('app_auteur_index', [], Response::HTTP_SEE_OTHER);
