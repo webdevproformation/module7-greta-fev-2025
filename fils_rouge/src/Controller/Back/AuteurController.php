@@ -67,7 +67,9 @@ final class AuteurController extends AbstractController
     #[Route('/{id}/edit', name: 'app_auteur_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Auteur $auteur, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(AuteurType::class, $auteur);
+      
+
+        $form = $this->createForm(AuteurType::class, null, [ "auteur" => $auteur ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
