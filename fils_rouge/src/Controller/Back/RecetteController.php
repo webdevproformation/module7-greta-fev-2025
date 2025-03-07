@@ -18,15 +18,27 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/recette')]
+#[IsGranted("ROLE_USER")]
 final class RecetteController extends AbstractController
 {
     #[Route(name: 'app_recette_index', methods: ['GET'])]
     public function index(RecetteRepository $recetteRepository): Response
     {
+
+        if(in_array("ROLE_REDACTEUR" ,$this->getUser()->getRoles())){
+            /** @var Auteur $auteur */
+            $auteur = $this->getUser();
+            $recettes = $auteur->getRecettes();
+        }else {
+            $recettes = $recetteRepository->findAll() ;
+        }
+
+
         return $this->render('recette/index.html.twig', [
-            'recettes' => $recetteRepository->findAll(),
+            'recettes' => $recettes 
         ]);
     }
 
