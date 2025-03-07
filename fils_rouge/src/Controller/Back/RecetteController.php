@@ -73,7 +73,7 @@ final class RecetteController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_recette_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_recette_show', methods: ['GET' , 'POST'])]
     public function show(
         Recette $recette ,
         Request $request ,
@@ -86,20 +86,25 @@ final class RecetteController extends AbstractController
             "form_single" => false
         ]);
 
-        $form->handleRequest($request );
+        $form->handleRequest( $request );
 
         if($form->isSubmitted() && $form->isValid()){
 
             $data = $form->getData();
             
-            $commentaire->setEmail($data["email"])
-                        ->setMessage($data["message"])
-                        ->setSujet($data["sujet"])
+            $commentaire->setEmail($data->getEmail())
+                        ->setSujet($data->getSujet())
+                        ->setMessage($data->getMessage())
                         ->setDtCreation(new DateTimeImmutable())
                         ->setRecette($recette);
 
             $em->persist($commentaire);
             $em->flush(); 
+
+            // vider le formulaire 
+            $form = $this->createForm(CommentaireType::class , null , [
+                "form_single" => false
+            ]);
 
         }
 
