@@ -25,7 +25,7 @@ final class FrontController extends AbstractController
         }
 
         return $this->render('front/index.html.twig', [
-           "recettes" => $recetteRepository->findBy([] , ["dt_creation" => $trie]),
+           "recettes" => $recetteRepository->findWithCommentaireBy($trie),
            "trie" => $trie == "desc" ? "asc" : "desc"
         ]);
     }

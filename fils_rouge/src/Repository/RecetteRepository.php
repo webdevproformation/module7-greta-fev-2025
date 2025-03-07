@@ -16,20 +16,27 @@ class RecetteRepository extends ServiceEntityRepository
         parent::__construct($registry, Recette::class);
     }
 
-    //    /**
-    //     * @return Article[] Returns an array of Article objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('a.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findWithCommentaireBy(string $order): array
+    {
+        return $this->createQueryBuilder('r')
+            ->select('r', 'c')
+            ->leftJoin("r.commentaires", "c")
+            ->orderBy('r.dt_creation', $order)
+            ->getQuery()
+            ->getResult()
+
+            // SQL => TABLE  
+
+            // SELECT * FROM
+            // recette AS r
+            // LEFT JOIN commentaire AS c
+            // ON c.recette_id = r.id
+            // ORDER BY r.dt_creation ASC
+        ;
+    }
 
     //    public function findOneBySomeField($value): ?Article
     //    {

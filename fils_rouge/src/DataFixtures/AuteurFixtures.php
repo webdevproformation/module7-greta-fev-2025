@@ -38,4 +38,6 @@ class AuteurFixtures extends Fixture
     }
 }
 
-// cas pratique => créer 30 commentaires via DataFixtures ET Faker 
+// bon café rdv 15h50 !!!!!!!!!!!
+// @ toute suite !!!!!!!!
+
