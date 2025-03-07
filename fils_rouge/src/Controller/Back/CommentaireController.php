@@ -17,8 +17,11 @@ final class CommentaireController extends AbstractController
     #[Route(name: 'app_commentaire_index', methods: ['GET'])]
     public function index(CommentaireRepository $commentaireRepository): Response
     {
+        // $commentaireRepository->findAll() ==>  SELECT * FROM commentaire
+        // $commentaireRepository->findBy() ==>  SELECT * FROM commentaire ORDER BY dt_creation DESC
+
         return $this->render('commentaire/index.html.twig', [
-            'commentaires' => $commentaireRepository->findAll(),
+            'commentaires' => $commentaireRepository->findBy([] , [ "dt_creation" => "DESC" ]),
         ]);
     }
 

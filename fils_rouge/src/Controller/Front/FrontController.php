@@ -16,11 +16,8 @@ final class FrontController extends AbstractController
         RecetteRepository $recetteRepository
     ): Response
     {
-
-        $recettes = $recetteRepository->findAll();
-
         return $this->render('front/index.html.twig', [
-           "recettes" => $recettes
+           "recettes" => $recetteRepository->findBy([] , ["dt_creation" => "DESC"])
         ]);
     }
 }

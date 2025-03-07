@@ -90,12 +90,8 @@ final class RecetteController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
-            $data = $form->getData();
-            
-            $commentaire->setEmail($data->getEmail())
-                        ->setSujet($data->getSujet())
-                        ->setMessage($data->getMessage())
-                        ->setDtCreation(new DateTimeImmutable())
+            $commentaire = $form->getData();
+            $commentaire->setDtCreation(new DateTimeImmutable())
                         ->setRecette($recette);
 
             $em->persist($commentaire);
@@ -107,8 +103,6 @@ final class RecetteController extends AbstractController
             ]);
 
         }
-
-        // dd($recette->getCommentaires() ); // requête avec jointure
 
         return $this->render('recette/show.html.twig', [
             'recette' => $recette,

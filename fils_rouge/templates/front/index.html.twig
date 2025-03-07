@@ -13,7 +13,8 @@
                     {{ image_recette(recette.image , 600 , 'card-img-top')  }}
                 </a>
                 <div class="card-body">
-                    <h2 class="card-title">{{ recette.titre }}</h2>
+                    <h2 class="card-title h3">{{ recette.titre }}</h2>
+                    <time datetime="{{ recette.dtCreation | date("Y-m-d H:i:s") }}" style="font-size:12px">publié le : {{ recette.dtCreation | date("d/m/Y") }}</time>
                     <p class="card-text">{{ recette.description | more ( 10 )}}</p>
                 </div>
                 <footer class="card-footer d-flex justify-content-between align-items-center">
