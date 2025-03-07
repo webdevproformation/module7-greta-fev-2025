@@ -5,6 +5,9 @@
 {% block body %}
     <h1>Recette</h1>
 
+    <a href="{{ path('app_recette_edit', {'id': recette.id}) }}">edit</a>
+
+
     <table class="table">
         <tbody>
             <tr>
@@ -34,9 +37,24 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_recette_index') }}">back to list</a>
+    <h3>Laisser un commentaire sur cette recette :</h3>
 
-    <a href="{{ path('app_recette_edit', {'id': recette.id}) }}">edit</a>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-primary my-3">
+    {{ form_end(form) }}
+
+    {% if commentaires | length > 0  %}
+
+    <h3>{{ commentaires | length }} Commentaire(s) existant(s) :</h3>
+
+    <ul>
+        {% for commentaire in commentaires %}
+            <li>{{ commentaire.email }} - {{ commentaire.sujet }} - {{ commentaire.message }}</li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
 
     
 {% endblock %}

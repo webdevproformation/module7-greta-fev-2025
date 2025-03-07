@@ -4,7 +4,11 @@ namespace App\Controller\Back;
 
 use App\Entity\Recette;
 use App\Form\RecetteType;
+use App\Entity\Commentaire;
+use App\Form\CommentaireType;
+use App\Repository\CommentaireRepository;
 use App\Repository\RecetteRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,10 +74,41 @@ final class RecetteController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_recette_show', methods: ['GET'])]
-    public function show(Recette $recette): Response
+    public function show(
+        Recette $recette ,
+        Request $request ,
+        EntityManagerInterface $em ,
+        
+    ): Response
     {
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireType::class , $commentaire , [
+            "form_single" => false
+        ]);
+
+        $form->handleRequest($request );
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $data = $form->getData();
+            
+            $commentaire->setEmail($data["email"])
+                        ->setMessage($data["message"])
+                        ->setSujet($data["sujet"])
+                        ->setDtCreation(new DateTimeImmutable())
+                        ->setRecette($recette);
+
+            $em->persist($commentaire);
+            $em->flush(); 
+
+        }
+
+        // dd($recette->getCommentaires() ); // requête avec jointure
+
         return $this->render('recette/show.html.twig', [
             'recette' => $recette,
+            "commentaires" => $recette->getCommentaires() , 
+            "form" => $form->createView()
         ]);
     }
 

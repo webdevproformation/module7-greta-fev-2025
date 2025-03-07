@@ -17,20 +17,26 @@ class CommentaireType extends AbstractType
             ->add('email')
             ->add('sujet')
             ->add('message')
-            ->add('dt_creation', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('recette', EntityType::class, [
-                'class' => Recette::class,
-                'choice_label' => 'id',
-            ])
         ;
+        if($options["form_single"]){
+            $builder
+                ->add('dt_creation', null, [
+                    'widget' => 'single_text',
+                ])
+                ->add('recette', EntityType::class, [
+                    'class' => Recette::class,
+                    'choice_label' => 'id',
+                ])
+            ;
+        }
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Commentaire::class,
+            "form_single" => true 
         ]);
     }
 }
