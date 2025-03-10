@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Auteur;
+use App\Entity\Category;
 use App\Entity\Recette;
+use Masterminds\HTML5\Entities;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -54,6 +56,13 @@ class RecetteType extends AbstractType
                 'class' => Auteur::class,
                 'choice_label' => function(Auteur $auteur){
                     return "{$auteur->getEmail()}" ; 
+                },
+            ])
+            ->add("category" , EntityType::class, [ // Symfony\Bridge\Doctrine\Form\Type\EntityType
+                "class" => Category::class , // App\Entity\Category
+                "placeholder" => "Sélectionner une catégorie pour cette recette",
+                'choice_label' => function(Category $categorie){
+                    return "{$categorie->getNom()}" ; 
                 },
             ])
         ;
