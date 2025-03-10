@@ -40,6 +40,9 @@ class Recette
     #[ORM\Column(nullable: true)]
     private ?string $image = null ;
 
+    #[ORM\ManyToOne(inversedBy: 'recette')]
+    private ?Category $category = null;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -156,6 +159,18 @@ class Recette
     public function setImage($image)
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
