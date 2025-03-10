@@ -20,10 +20,6 @@ final class FrontController extends AbstractController
     {
         $trie = $request->query->get("trie", "desc");
 
-        if(!in_array($trie , ["asc", "desc"])){
-            $trie =  "desc";
-        }
-
         return $this->render('front/index.html.twig', [
            "recettes" => $recetteRepository->findWithCommentaireBy($trie),
            "trie" => $trie == "desc" ? "asc" : "desc"

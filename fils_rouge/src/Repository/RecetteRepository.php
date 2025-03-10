@@ -21,6 +21,11 @@ class RecetteRepository extends ServiceEntityRepository
      */
     public function findWithCommentaireBy(string $order): array
     {
+
+        if(!in_array( $order , ["asc", "desc"])){
+            $order =  "desc";
+        }
+
         return $this->createQueryBuilder('r')
             ->select('r', 'c')
             ->leftJoin("r.commentaires", "c")
