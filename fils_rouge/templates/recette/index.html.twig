@@ -12,6 +12,7 @@
             <tr>
                 <th>Id</th>
                 <th>Titre</th>
+                <th>Catégorie</th>
                 <th>Miniature</th>
                 <th>Prix</th>
                 <th>Créé le</th>
@@ -24,6 +25,7 @@
             <tr>
                 <td>{{ recette.id }}</td>
                 <td>{{ recette.titre }}</td>
+                <td>{{ recette.category.nom }}</td>
                 <!-- twig extension  -->
                 <td>{{ image_recette(recette.image)  }}</td>
                 <td class="text-center">{{ recette.prix | info_prix }}</td>

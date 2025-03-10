@@ -19,6 +19,10 @@
                 <td>{{ recette.titre }}</td>
             </tr>
             <tr>
+                <th>Catégorie</th>
+                <td>{{ recette.category.nom }}</td>
+            </tr>
+            <tr>
                 <th>Image</th>
                 <td>{{ image_recette(recette.image , 400)  }}</td>
             </tr>
